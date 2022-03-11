@@ -27,7 +27,7 @@ public class Reply {
     @JoinColumn(name="boardId")
     private Board board;
 
-    @ManyToOne                  // 하나의 유저는 여러개 댓글을 작성할 수 있따.
+    @ManyToOne            // 하나의 유저는 여러개 댓글을 작성할 수 있따.
     @JoinColumn(name="userId")
     private Users users;
 
