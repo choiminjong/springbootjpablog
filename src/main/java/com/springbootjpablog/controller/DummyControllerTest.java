@@ -22,6 +22,18 @@ public class DummyControllerTest {
     @Autowired //의존성 주입
     private UserRepository userRepository;
 
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable Long id) {
+
+        try {
+            userRepository.deleteById(id);
+        } catch (IllegalStateException e){
+            return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+        }
+        return "삭제되었습니다. id"+id;
+    }
+
+
     @PutMapping("/dummy/user/{id}")
     public Users updateUser(@PathVariable Long id, @RequestBody Users requestUser){
 
@@ -37,7 +49,7 @@ public class DummyControllerTest {
         user.setEmail(requestUser.getEmail());
 
         userRepository.save(user);
-        return null;
+        return user;
     }
 
     //http://localhost:8080/dummy/user (요청)
@@ -64,7 +76,7 @@ public class DummyControllerTest {
 
         //orElseGet : 값이 null일때만 호출된다.
         Users user = userRepository.findById(id)
-                     .orElseThrow(() -> new IllegalStateException("해당 유저는 없습니다."));
+                     .orElseThrow(() -> new IllegalArgumentException("해당 유저는 없습니다."));
         return user;
     }
 
