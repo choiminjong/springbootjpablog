@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>Good Thymes Virtual Grocery</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
-</head>
+<head th:replace="fragments/common :: head('Hello, Spring Boot!')"></head>
 
 <body>
-<p th:text="#{home.welcome}">Welcome to our grocery store!</p>
-</body>
 
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" th:replace="fragments/common::menu('login')"></nav>
+
+    <div class="container">
+
+    </div>
+
+<footer th:replace="fragments/common :: footer"></footer>
+
+</body>
 </html>
+
+
