@@ -4,8 +4,8 @@ import com.springbootjpablog.model.Users;
 import com.springbootjpablog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 //스프링이 컴포넌트스캔을 통해서 Bean 등록을 해줍니다. IOC를 대신 해줍니다.
 @Service
@@ -15,15 +15,12 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public int accout(Users users) {
+    public void accout(Users users) {
+        userRepository.save(users);
+    }
 
-        try {
-            userRepository.save(users);
-            return 1;
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("e = " + e);
-        }
-        return  -1;
+    @Transactional(readOnly = true) //select할 때 트랜잭션 시작,서비스 종료시에 트랜잭션 종료(정합성)
+    public Users login(Users users) {
+        return userRepository.findByUsernameAndPassword(users.getUsername(), users.getPassword());
     }
 }

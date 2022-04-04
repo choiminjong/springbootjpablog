@@ -29,6 +29,12 @@
                 <a class="nav-link" href="#" th:href="@{/user/account}">회원가인
                     <span class="sr-only" th:if="${menu} == 'account'">(current)</span></a>
             </li>
+
+            <li class="nav-item" th:classappend="${menu} == 'write'? 'active'">
+                <a th:if="${session.principal != null}" class="nav-link" href="#" th:href="@{/user/account}">글쓰기
+                    <span class="sr-only" th:if="${menu} == 'write'">(current)</span></a>
+            </li>
+
         </ul>
     </div>
 </nav>
@@ -40,8 +46,6 @@
         <p>📞 010-2222-7777</p>
         <p>🏴 서울 천왕동 </p>
     </div>
-
-    <script type="text/javascript" th:src="@{/js/user.js}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 public class UserApiController {
 
@@ -20,10 +22,20 @@ public class UserApiController {
     @PostMapping("/api/user")
     public ResponseDto<Integer> save(@RequestBody Users users){
         System.out.println("UserApiController : save 호출");
-
         users.setRole(RoleType.USER);
-        //실제로 DB에 Insert
-        int result = userService.accout(users);
-        return new ResponseDto<Integer>(HttpStatus.OK,result);
+        userService.accout(users); //실제로 DB에 Insert
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
+
+    @PostMapping("/api/user/login")
+    public ResponseDto<Integer> login(@RequestBody Users users, HttpSession session){
+        Users principal = userService.login(users);
+
+        if(principal != null){
+            session.setAttribute("principal",principal);
+        }
+
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+    }
+
 }
