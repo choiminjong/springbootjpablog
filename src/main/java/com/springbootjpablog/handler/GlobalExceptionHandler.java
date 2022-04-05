@@ -1,6 +1,6 @@
 package com.springbootjpablog.handler;
 
-import com.springbootjpablog.dto.ResponseDto;
+import com.springbootjpablog.model.dto.ResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

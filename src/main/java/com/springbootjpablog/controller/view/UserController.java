@@ -1,4 +1,4 @@
-package com.springbootjpablog.controller;
+package com.springbootjpablog.controller.view;
 
 import com.springbootjpablog.model.Users;
 import org.springframework.stereotype.Controller;
