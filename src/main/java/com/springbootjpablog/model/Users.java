@@ -29,12 +29,10 @@ public class Users {
     @Size(min=2, max=30, message = "아이디는 2자이상 30자이하로 작성해주세요")
     private String username;                            //아이디
 
-    @Column(nullable = false, length = 100)             //패스워드를 해쉬하면 늘어나기때문에
-    @Size(min=2, max=30, message = "패스워드는 2자이상 30자이하로 작성해주세요")
+    @Column(nullable = false, length = 255)             //패스워드를 해쉬하면 늘어나기때문에
     private String password;
 
     @Column(nullable = false, length = 50)
-    @Size(min=2, max=30, message = "이메일은 2자이상 30자이하로 작성해주세요")
     private String email;
 
     //@ColumnDefault("user")
