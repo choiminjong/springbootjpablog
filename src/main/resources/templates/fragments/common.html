@@ -22,22 +22,27 @@
         <ul class="navbar-nav">
 
             <li class="nav-item" th:classappend="${menu} == 'loginForm'? 'active'">
-                <a th:if="${session.principal == null}" class="nav-link" href="#" th:href="@{/loginForm}">로그인
+                <a  sec:authorize="!isAuthenticated()" class="nav-link" href="#" th:href="@{/auth/loginForm}">로그인
                     <span class="sr-only" th:if="${menu} == 'loginForm'">(current)</span></a>
             </li>
 
             <li class="nav-item" >
-                <a th:if="${session.principal != null}" class="nav-link" href="#" th:href="@{/logout}">로그아웃</a>
+                <a  sec:authorize="isAuthenticated()" class="nav-link" href="#" th:href="@{/logout}">로그아웃</a>
             </li>
 
             <li class="nav-item" th:classappend="${menu} == 'joinForm'? 'active'">
-                <a class="nav-link" href="#" th:href="@{/joinForm}">회원가인
+                <a class="nav-link" href="#" th:href="@{/auth/joinForm}">회원가인
                     <span class="sr-only" th:if="${menu} == 'joinForm'">(current)</span></a>
             </li>
 
             <li class="nav-item" th:classappend="${menu} == 'write'? 'active'">
-                <a th:if="${session.principal != null}" class="nav-link" href="#" th:href="@{/user/account}">글쓰기
+                <a class="nav-link" href="#" th:href="@{/board/form}">글쓰기
                     <span class="sr-only" th:if="${menu} == 'write'">(current)</span></a>
+            </li>
+
+            <li class="nav-item" th:classappend="${menu} == 'userInfo'? 'active'">
+                <a class="nav-link" href="#" th:href="@{/user/form}">회원정보
+                    <span class="sr-only" th:if="${menu} == 'userInfo'">(current)</span></a>
             </li>
 
         </ul>

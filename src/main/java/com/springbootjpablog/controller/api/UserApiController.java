@@ -19,22 +19,10 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/user")
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody Users users){
-        System.out.println("UserApiController : save 호출");
         users.setRole(RoleType.USER);
-        userService.accout(users); //실제로 DB에 Insert
-        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-    }
-
-    @PostMapping("/api/user/login")
-    public ResponseDto<Integer> login(@RequestBody Users users, HttpSession session){
-        Users principal = userService.login(users);
-
-        if(principal != null){
-            session.setAttribute("principal",principal);
-        }
-
+        userService.accout(users);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 

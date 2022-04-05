@@ -9,29 +9,28 @@
 
 <div class="container">
 
-    <form action="#" method="post">
+    <form action="#" th:action="@{/login_proc}" method="post">
 
         <div class="form-group">
             <label for="username">username</label>
-            <input type="text" class="form-control" id="username">
+            <input type="text" class="form-control" id="username" name="username" required="required">
         </div>
 
         <div class="form-group">
-            <label for="password">username</label>
-            <input type="text" class="form-control" id="password">
+            <label for="password">password</label>
+            <input type="text" class="form-control" id="password" name="password" required="required">
+        </div>
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">로그인</button>
         </div>
 
     </form>
 
-    <div class="text-right">
-        <button id="btn-login" class="btn btn-primary">로그인</button>
-    </div>
+
 
 
 </div>
-
-
-<script type="text/javascript" th:src="@{/js/login.js}"></script>
 
 <footer th:replace="fragments/common :: footer"></footer>
 

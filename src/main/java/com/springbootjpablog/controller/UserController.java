@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 
-    @GetMapping("/joinForm")
-    public String account(Model model) {
+    @GetMapping("/auth/joinForm")
+    public String join(Model model) {
+
         model.addAttribute("user", new Users());
+
         return "user/joinForm";
     }
 
-    @GetMapping("/loginForm")
+    @GetMapping("/auth/loginForm")
     public String login() {
         return "user/loginForm";
     }
