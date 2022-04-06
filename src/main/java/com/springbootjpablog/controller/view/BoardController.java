@@ -26,4 +26,11 @@ public class BoardController {
 
         return "index";
     }
+
+    @GetMapping("/board/saveForm")
+    public String saveForm(){
+
+        return "board/saveForm";
+
+    }
 }

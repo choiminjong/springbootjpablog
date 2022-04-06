@@ -1,20 +1,16 @@
 package com.springbootjpablog.controller;
 
 import com.springbootjpablog.model.RoleType;
-import com.springbootjpablog.model.Users;
+import com.springbootjpablog.model.entity.Users;
 import com.springbootjpablog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 @RestController
 public class DummyControllerTest {

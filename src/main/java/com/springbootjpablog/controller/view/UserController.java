@@ -1,6 +1,6 @@
 package com.springbootjpablog.controller.view;
 
-import com.springbootjpablog.model.Users;
+import com.springbootjpablog.model.entity.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,7 @@
 package com.springbootjpablog.repository;
 
-import com.springbootjpablog.model.Users;
+import com.springbootjpablog.model.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 

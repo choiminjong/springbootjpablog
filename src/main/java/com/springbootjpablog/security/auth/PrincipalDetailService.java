@@ -1,6 +1,6 @@
 package com.springbootjpablog.security.auth;
 
-import com.springbootjpablog.model.Users;
+import com.springbootjpablog.model.entity.Users;
 import com.springbootjpablog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

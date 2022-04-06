@@ -1,5 +1,6 @@
-package com.springbootjpablog.model;
+package com.springbootjpablog.model.entity;
 
+import com.springbootjpablog.model.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

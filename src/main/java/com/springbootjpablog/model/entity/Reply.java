@@ -1,4 +1,4 @@
-package com.springbootjpablog.model;
+package com.springbootjpablog.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
