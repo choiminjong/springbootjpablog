@@ -1,7 +1,9 @@
 package com.springbootjpablog.controller;
 
 import com.springbootjpablog.model.RoleType;
+import com.springbootjpablog.model.entity.Board;
 import com.springbootjpablog.model.entity.Users;
+import com.springbootjpablog.repository.BoardRepository;
 import com.springbootjpablog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,10 @@ public class DummyControllerTest {
 
     @Autowired //의존성 주입
     private UserRepository userRepository;
+
+    @Autowired //의존성 주입
+    private BoardRepository boardRepository;
+
 
     @DeleteMapping("/dummy/user/{id}")
     public String delete(@PathVariable Long id) {
@@ -59,6 +65,13 @@ public class DummyControllerTest {
     public Page<Users> pageList(@PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Users> users = userRepository.findAll(pageable);
         return users;
+    }
+
+    //한페이지당 2건 데이터를 리턴받아 볼 수 있도록 설정
+    @GetMapping("/dummy/board/page")
+    public Page<Board> boardPageList(@PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Board> board = boardRepository.findAll(pageable);
+        return board;
     }
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="fragments/common :: head('Hello, Spring Boot!')"></head>
 
@@ -9,26 +10,33 @@
 
 <div class="container">
 
-    <div class="card m-2">
+    <div class="card m-2" th:each="board : ${boards}" >
         <div class="card-body">
-            <h4 class="card-title">제목</h4>
-            <a href="#" class="btn btn-primary">상세보기</a>
+            <h4 class="card-title" th:text="${board.title}" >제목</h4>
+            <a href="#" class="btn btn-primary" th:href="@{/board/form(id=${board.id})}">상세보기</a>
         </div>
     </div>
 
-    <div class="card m-2">
-        <div class="card-body">
-            <h4 class="card-title">제목</h4>
-            <a href="#" class="btn btn-primary">상세보기</a>
-        </div>
-    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <!--getPageNumber 첫 페이지와 동일하다면 Previous 페이지 버튼을 클릭할 수 없도록 비활성화-->
+            <li class="page-item" th:classappend="${1 == boards.pageable.getPageNumber() +1} ? 'disabled'">
+                <a class="page-link" href="#" th:href="@{/(page=${boards.pageable.getPageNumber() - 1})}">Previous</a>
+            </li>
 
-    <div class="card m-2">
-        <div class="card-body">
-            <h4 class="card-title">제목</h4>
-            <a href="#" class="btn btn-primary">상세보기</a>
-        </div>
-    </div>
+            <!--현재 페이지와 페이지와 같으면 클릭할 수 있도록 비활성화 / numbers.sequence 활용해 페이지 넘버 범위 정하기 -->
+            <li class="page-item " th:classappend="${i == boards.pageable.getPageNumber() +1} ? 'disabled'"
+                th:each="i  : ${#numbers.sequence(startPage,endPage)} ">
+                <a class="page-link" href="#" th:text="${i}" th:href="@{/(page=${i - 1})}">1</a></li>
+
+            <!--totalPages 전체 페이지 마지막 넘버와 동일하다면 next가 될 수 없도록 비활성화를 한다.-->
+            <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.getPageNumber() +1} ? 'disabled'">
+                <a class="page-link" href="#" th:href="@{/(page=${boards.pageable.getPageNumber() + 1})}">Next</a>
+            </li>
+
+        </ul>
+    </nav>
+
 </div>
 
 <footer th:replace="fragments/common :: footer"></footer>
