@@ -10,19 +10,22 @@
 <div class="container">
 
 
-    <form class="form-signin" method="post">
+    <form class="form-signin"  th:object="${board}" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Title" >
+            <input type="text" class="form-control" id="title"  th:field="*{title}" name="title" placeholder="Title" >
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea id="content" name="content" ></textarea>
+            <textarea id="content" th:field="*{content}" name="content" ></textarea>
         </div>
     </form>
 
-    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block">글쓰기완료</button>
+
+    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block " th:if="${param.id} == null" >글쓰기 완료</button>
+    <button class="btn btn-lg btn-primary btn-block" th:if="${param.id} != null" th:onclick="|history.back()|">뒤돌아가기</button>
+    <button id="btn-board-delete" class="btn btn-lg btn-primary btn-block " th:if="${param.id} != null" >글쓰기 삭제</button>
 
 </div>
 
