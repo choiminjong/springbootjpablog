@@ -11,6 +11,12 @@
 
 
     <form class="form-signin"  th:object="${board}" method="post">
+        <input type="hidden" id="boardId"  th:field="*{id}" name="boardId" >
+
+        <div th:if="${param.id} != null">
+            작성자 : <span th:text=="*{users.username}"></span>
+        </div>
+
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title"  th:field="*{title}" name="title" placeholder="Title" >
@@ -20,13 +26,11 @@
             <label for="content">Content</label>
             <textarea id="content" th:field="*{content}" name="content" ></textarea>
         </div>
+
     </form>
-
-
-    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block " th:if="${param.id} == null" >글쓰기 완료</button>
+    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block " th:if="${param.id} == null" th:onclick="|boardForm()|">글쓰기 완료</button>
     <button class="btn btn-lg btn-primary btn-block" th:if="${param.id} != null" th:onclick="|history.back()|">뒤돌아가기</button>
-    <button id="btn-board-delete" class="btn btn-lg btn-primary btn-block " th:if="${param.id} != null" >글쓰기 삭제</button>
-
+    <button id="btn-board-delete" class="btn btn-lg btn-primary btn-block " th:if="${param.id} != null" th:onclick="|boardDelete()|" >글쓰기 삭제</button>
 </div>
 
 

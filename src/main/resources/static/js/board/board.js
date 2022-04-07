@@ -1,12 +1,3 @@
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    //회원가입
-    const btnBoardSave= document.querySelector('#btn-board-save');
-    btnBoardSave.addEventListener('click', boardForm, false);
-
-});
-
 async function boardForm(){
     /*
     글쓰기
@@ -24,19 +15,42 @@ async function boardForm(){
         },
         body: JSON.stringify(data)
     });
+
     let error  = await response.json();
 
-    console.log(error)
-
-    if (response.ok) {
+    if(error['status'] == '200'){
         alert("글쓰기가 완료되었습니다.");
         location.href="/";
-    } else {
+    }else{
+        alert("글쓰기를 실패했습니다.");
+    }
+}
 
-        alert(JSON.stringify(error));
+async function boardDelete(){
+    /*
+    글 삭제
+    */
+    let boardId = document.querySelector('#boardId').value;
+    let url = "/api/board/"+boardId
+
+    let response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+    let error  = await response.json();
+
+    if(error['status'] == '200'){
+        alert("게시글 삭제되었습니다.");
+        location.href="/";
+    }else{
+        alert("게시글 삭제를 실패했습니다.");
     }
 
 }
+
+
 
 
 

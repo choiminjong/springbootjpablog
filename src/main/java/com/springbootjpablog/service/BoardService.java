@@ -24,12 +24,12 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<Board> list(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Board findById(Long id) {
             return boardRepository.findById(id)
                 .orElseThrow(()-> {
@@ -37,4 +37,8 @@ public class BoardService {
             });
     }
 
+    @Transactional
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
