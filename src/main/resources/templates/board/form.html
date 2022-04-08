@@ -28,7 +28,7 @@
         </div>
 
     </form>
-    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block " th:if="${param.id} == null" th:onclick="|boardForm()|">글쓰기 완료</button>
+    <button id="btn-board-save" class="btn btn-lg btn-primary btn-block " th:onclick="|boardForm()|">글쓰기 수정</button>
     <button class="btn btn-lg btn-primary btn-block" th:if="${param.id} != null" th:onclick="|history.back()|">뒤돌아가기</button>
     <button id="btn-board-delete" class="btn btn-lg btn-primary btn-block " th:if="${param.id} != null" th:onclick="|boardDelete()|" >글쓰기 삭제</button>
 </div>

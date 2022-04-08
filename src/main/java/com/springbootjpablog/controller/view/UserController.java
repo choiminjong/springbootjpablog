@@ -10,9 +10,7 @@ public class UserController {
 
     @GetMapping("/auth/joinForm")
     public String join(Model model) {
-
         model.addAttribute("user", new Users());
-
         return "user/joinForm";
     }
 
@@ -20,4 +18,11 @@ public class UserController {
     public String login() {
         return "user/loginForm";
     }
+
+    @GetMapping("/user/updateForm")
+    public String updateForm(Model model) {
+        model.addAttribute("user", new Users());
+        return "user/updateForm";
+    }
+
 }

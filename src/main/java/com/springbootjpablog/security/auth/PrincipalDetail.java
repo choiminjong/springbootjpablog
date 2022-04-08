@@ -13,10 +13,10 @@ import java.util.Collection;
 @Getter
 public class PrincipalDetail implements UserDetails {
 
-    private Users users; //콤포지션
+    private Users user; //콤포지션
 
-    public PrincipalDetail(Users users){
-        this.users = users;
+    public PrincipalDetail(Users user){
+        this.user = user;
     }
 
     //계정 권한을 확인한다.
@@ -24,18 +24,18 @@ public class PrincipalDetail implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<GrantedAuthority> collectors = new ArrayList<>();
-        collectors.add(()-> { return "ROLE_"+users.getRole(); });
+        collectors.add(()-> { return "ROLE_"+user.getRole(); });
         return collectors;
     }
 
     @Override
     public String getPassword() {
-        return users.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return  users.getUsername();
+        return  user.getUsername();
     }
 
     //계정이 만료되지 않았는지 리턴한다.(true:만료가됨)

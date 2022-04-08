@@ -1,12 +1,3 @@
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    //회원가입
-    const btnJoin= document.querySelector('#btn-join');
-    btnJoin.addEventListener('click', joinForm, false);
-
-});
-
 async function joinForm(){
     /*
     Users 회원가입
@@ -26,14 +17,45 @@ async function joinForm(){
         body: JSON.stringify(data)
     });
 
-     if (response.ok) {
-         alert("회원가입이 완료되었습니다.");
-         location.href="/";
-     } else {
-         let error  = await response.json();
-         alert(JSON.stringify(error));
-     }
+    let error  = await response.json();
+
+    if(error['status'] == '200'){
+        alert("회원가입이 완료되었습니다.");
+        location.href="/";
+    }else{
+        alert("회원가입을 실패했습니다.");
+    }
 }
+
+async function userUpdate(){
+    /*
+    User 회원정보 수정
+    */
+    let data ={
+        id : document.querySelector('#id').value,
+        password : document.querySelector('#password').value,
+        email : document.querySelector('#email').value
+    }
+
+    let url = "/user"
+    let response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+    });
+
+    let error  = await response.json();
+
+    if(error['status'] == '200'){
+        alert("회원수정이 완료되었습니다.");
+        location.href="/";
+    }else{
+        alert("회원수정이 실패했습니다.");
+    }
+}
+
 
 
 
