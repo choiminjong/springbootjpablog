@@ -33,6 +33,7 @@ async function userUpdate(){
     */
     let data ={
         id : document.querySelector('#id').value,
+        username : document.querySelector('#username').value,
         password : document.querySelector('#password').value,
         email : document.querySelector('#email').value
     }
