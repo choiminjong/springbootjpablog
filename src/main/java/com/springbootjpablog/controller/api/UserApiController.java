@@ -29,8 +29,7 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -45,16 +44,6 @@ public class UserApiController {
     @PutMapping("/user")
     public ResponseDto<Integer> update(@RequestBody Users user) {
         userService.userUpdate(user);
-
-        //DB내용이 변경전 세션을 요청하면 세션 변경이 불가합니다.
-        //트랜잭션이 종료되기때문에 DB에 값은 변경되었지만,
-        //세션값은 변경되지 않은 상태입니다. 직접 세션값을 변경해야합니다.
-        System.out.println("user = " + user);
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword())
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

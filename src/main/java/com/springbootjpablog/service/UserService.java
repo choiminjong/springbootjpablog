@@ -26,6 +26,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+
     @Transactional
     public void accout(Users users) {
         users.setPassword((passwordEncoder.encode(users.getPassword())));
@@ -50,5 +54,13 @@ public class UserService {
 
         //회원수정 함수 종료시=서비스 종료=트랜잭션 종료=commit이 자동으로 실행됩니다.
         //영속화된 persistance 객체의 변화가 감지되면 더디체킹이 되어 변환된 데이터를 업데이트문을 실행한다.
+
+        //authenticationManager 활용해서 token을 재발급받아 세션 정보를 변경하는 방법을 활용했습니다.
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword())
+        );
+
+        //인증정보를 저장해서 가지고있는 객체입니다. 해당 객체를 활용해서 인증정보를 뻇어 사용할 수 있습니다.
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
