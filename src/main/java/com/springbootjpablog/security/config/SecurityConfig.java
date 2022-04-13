@@ -15,6 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration // 빈등록 (IoC관리)
 @EnableWebSecurity // 시큐리티 필터가 등록이 된다.
@@ -48,16 +53,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(principalDetailService).passwordEncoder(passwordEncoder());
     }
 
+    // CORS 허용 적용
+    //Cors 허용 정책 설정하는 Bean
+    //    * addAllowedOrigin() : 허용할 URL
+    //    * addAllowedHeader() : 허용할 Header
+    //    * addAllowedMethod() : 허용할 Http Method
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                //.cors().configurationSource(corsConfigurationSource()) //CorsConfigurationSource 를 cors 정책의 설정파일
+        //.and()
                 .authorizeRequests()
                 .antMatchers("/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-
         .and()
                 .formLogin()
                 .loginPage("/auth/loginForm")
