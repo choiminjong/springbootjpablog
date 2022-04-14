@@ -41,6 +41,7 @@ public class BoardController {
         return "index";
     }
 
+    //블로그 쓰기  , 블로그 수정
     @GetMapping("/board/form")
     public String saveForm( Model model, @RequestParam(required = false) Long id){
 
@@ -53,5 +54,16 @@ public class BoardController {
 
         return "board/form";
     }
+
+    //블로그 데이터만 확인
+    @GetMapping("/board/detailForm")
+    public String datailForm(Model model, @RequestParam Long id){
+
+        Board board = boardService.findById(id);
+        model.addAttribute("board", board);
+
+        return "board/detailForm";
+    }
+
 
 }
