@@ -1,6 +1,6 @@
 package com.springbootjpablog.controller;
 
-import com.springbootjpablog.model.RoleType;
+import com.springbootjpablog.model.eunm.RoleType;
 import com.springbootjpablog.model.entity.Board;
 import com.springbootjpablog.model.entity.Users;
 import com.springbootjpablog.repository.BoardRepository;

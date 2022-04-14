@@ -1,13 +1,11 @@
 package com.springbootjpablog.model.entity;
 
-import com.springbootjpablog.model.RoleType;
+import com.springbootjpablog.model.eunm.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -40,7 +38,8 @@ public class Users {
     //DB는 RoleType 이라는 포맷이없다
     @Enumerated(EnumType.STRING)
     private RoleType role;                              // Enum을 쓰는게 좋다.//AMDIN,USER
-    //private String role;
+
+    private String oauth;                               //회원가입 타입 구분
 
     @CreationTimestamp                                  // 저장시 시간이 자동 입력
     private Timestamp creatData;

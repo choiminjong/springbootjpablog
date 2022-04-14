@@ -1,4 +1,4 @@
-package com.springbootjpablog.model;
+package com.springbootjpablog.model.eunm;
 
 public enum RoleType {
 

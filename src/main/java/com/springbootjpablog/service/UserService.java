@@ -1,6 +1,7 @@
 package com.springbootjpablog.service;
 
 import com.springbootjpablog.model.entity.Users;
+import com.springbootjpablog.model.eunm.RoleType;
 import com.springbootjpablog.repository.UserRepository;
 import com.springbootjpablog.security.auth.PrincipalDetail;
 import com.springbootjpablog.security.auth.PrincipalDetailService;
@@ -29,12 +30,19 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     @Transactional
-    public void accout(Users users) {
-        users.setPassword((passwordEncoder.encode(users.getPassword())));
-        System.out.println("users = " + users);
-        userRepository.save(users);
+    public void accout(Users user) {
+        user.setPassword((passwordEncoder.encode(user.getPassword())));
+        user.setRole(RoleType.USER);
+        userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Users accoutSearch(String username) {
+        return userRepository.findByUsername(username)
+                .orElseGet(()-> {
+                    return new Users(); //찾을 수 없을때 빈 객체를 반환합니다.
+                });
     }
 
     @Transactional
