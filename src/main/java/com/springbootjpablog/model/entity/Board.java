@@ -47,6 +47,7 @@ public class Board {
     // board 데이터를 조회하면 내부적으로 reply 테이블를 조회해서 데이터를 반환한다.
     @OneToMany(mappedBy = "board" ,fetch = FetchType.EAGER)  //mappedBy 연관관계의 주인이 아니다(FK가 아니다) DB컬럼에 만들지 않아도된다. 명시
     @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
     private List<Reply> replys;
 
     @CreationTimestamp           // 저장시 시간이 자동 입력
