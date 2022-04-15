@@ -1,4 +1,4 @@
-package com.springbootjpablog.controller;
+package com.springbootjpablog.controller.test;
 
 import com.springbootjpablog.model.eunm.RoleType;
 import com.springbootjpablog.model.entity.Board;
