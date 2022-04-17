@@ -1,5 +1,6 @@
 package com.springbootjpablog.controller.api;
 
+import com.springbootjpablog.model.dto.ReplySaveReqestDto;
 import com.springbootjpablog.model.dto.ResponseDto;
 import com.springbootjpablog.model.entity.Board;
 import com.springbootjpablog.model.entity.Reply;
@@ -30,15 +31,19 @@ public class BoardApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
+//    @PostMapping("/api/board/{boardId}/reply")
+//    public ResponseDto<Integer> replyWrite(@PathVariable Long boardId,
+//                                           @RequestBody Reply reply,
+//                                           @AuthenticationPrincipal PrincipalDetail principal){
+//        boardService.replyWrite(principal.getUser(),boardId,reply);
+//        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+//    }
+
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replyWrite(@PathVariable Long boardId,
-                                           @RequestBody Reply reply,
-                                           @AuthenticationPrincipal PrincipalDetail principal){
-        boardService.replyWrite(principal.getUser(),boardId,reply);
+    public ResponseDto<Integer> replyWrite(@RequestBody ReplySaveReqestDto replySaveReqestDto){
+        boardService.replyWrite(replySaveReqestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
-
-
 
 
 }

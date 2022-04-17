@@ -57,11 +57,12 @@ async function replySave(){
         댓글 쓰기
     */
     let data ={
+        boardId : document.querySelector('#boardId').value,
+        userId : document.querySelector('#userId').value,
         content : document.querySelector('#reply-content').value
     }
-    let boardId = document.querySelector('#boardId').value;
 
-    let url = `/api/board/${boardId}/reply`
+    let url = `/api/board/${data.boardId}/reply`
     let response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -74,7 +75,7 @@ async function replySave(){
 
     if(error['status'] == '200'){
         alert("댓글작성이 완료되었습니다.");
-        location.href=`/board/detailForm?id=${boardId}`;
+        location.href=`/board/detailForm?id=${data.boardId}`;
     }else{
         alert("댓글작성이 실패했습니다.");
     }
