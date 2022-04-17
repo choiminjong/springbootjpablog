@@ -49,28 +49,36 @@ public class BoardService {
 //        replyRepository.save(requestReply);
 //    }
 
+//    @Transactional
+//    public void replyWrite(ReplySaveReqestDto replySaveReqestDto) {
+//       //영속화 완료
+//        Users user = userRepository.findById(replySaveReqestDto.getUserId())
+//                .orElseThrow(() -> {
+//                    return new IllegalArgumentException("댓글 쓰기 실패  : 사용자 id를 찾 을 수 없습니다.");
+//                });
+//
+//        //영속화 완료
+//        Board board = boardRepository.findById(replySaveReqestDto.getBoardId())
+//                .orElseThrow(() -> {
+//                    return new IllegalArgumentException("댓글 쓰기 실패  : 게시글 id를 찾 을 수 없습니다.");
+//                });
+//
+//        //builder를 활용해서 오브젝트 생성해서 주입한다.
+//        Reply reply = Reply.builder()
+//                .users(user)
+//                .board(board)
+//                .content(replySaveReqestDto.getContent())
+//                .build();
+//
+//        replyRepository.save(reply);
+//    }
+
     @Transactional
     public void replyWrite(ReplySaveReqestDto replySaveReqestDto) {
-       //영속화 완료
-        Users user = userRepository.findById(replySaveReqestDto.getUserId())
-                .orElseThrow(() -> {
-                    return new IllegalArgumentException("댓글 쓰기 실패  : 사용자 id를 찾 을 수 없습니다.");
-                });
 
-        //영속화 완료
-        Board board = boardRepository.findById(replySaveReqestDto.getBoardId())
-                .orElseThrow(() -> {
-                    return new IllegalArgumentException("댓글 쓰기 실패  : 게시글 id를 찾 을 수 없습니다.");
-                });
-
-        //builder를 활용해서 오브젝트 생성해서 주입한다.
-        Reply reply = Reply.builder()
-                .users(user)
-                .board(board)
-                .content(replySaveReqestDto.getContent())
-                .build();
-
-        replyRepository.save(reply);
+        replyRepository.replySave(replySaveReqestDto.getUserId(),
+                                  replySaveReqestDto.getBoardId(),
+                                  replySaveReqestDto.getContent());
     }
 
 
