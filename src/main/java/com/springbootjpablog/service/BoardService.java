@@ -97,7 +97,13 @@ public class BoardService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void boardDelete(Long id) {
+
         boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void replyDelete(Long replyId) {
+        replyRepository.deleteById(replyId);
     }
 }

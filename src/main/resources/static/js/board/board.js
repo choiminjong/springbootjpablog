@@ -81,3 +81,24 @@ async function replySave(){
     }
 
 }
+
+async function replyDelete(boardId, replyId){
+    /*
+    댓글 삭제
+    */
+
+    let url = `/api/board/${boardId}/reply/${replyId}`
+
+    let response = await fetch(url, {
+        method: 'DELETE'
+    });
+    let error  = await response.json();
+
+    if(error['status'] == '200'){
+        alert("댓글을 삭제되었습니다.");
+        location.href=`/board/detailForm?id=${boardId}`;
+    }else{
+        alert("댓글 삭제를 실패했습니다.");
+    }
+
+}

@@ -27,7 +27,7 @@ public class BoardApiController {
 
     @DeleteMapping("/api/board/{id}")
     public ResponseDto<Integer> deleteBoard(@PathVariable Long id){
-        boardService.delete(id);
+        boardService.boardDelete(id);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
@@ -42,6 +42,13 @@ public class BoardApiController {
     @PostMapping("/api/board/{boardId}/reply")
     public ResponseDto<Integer> replyWrite(@RequestBody ReplySaveReqestDto replySaveReqestDto){
         boardService.replyWrite(replySaveReqestDto);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+    }
+
+    @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+    public ResponseDto<Integer> deleteReply(@PathVariable Long replyId){
+        boardService.replyDelete(replyId);
+
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
